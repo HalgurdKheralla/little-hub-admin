@@ -14,6 +14,7 @@ import Analytics from "./pages/Analytics";
 import Support from "./pages/Support";
 import MobileApp from "./pages/MobileApp";
 import Notifications from "./pages/Notifications";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
             <Route path="/support" element={<Support />} />
             <Route path="/mobile-app" element={<MobileApp />} />
             <Route path="/notifications" element={<Notifications />} />
+            <Route path="/settings" element={<Settings />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

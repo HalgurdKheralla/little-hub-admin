@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search, Filter, MessageSquare, Clock, CheckCircle2 } from "lucide-react";
+import { KnowledgeBaseManager } from "@/components/support/KnowledgeBaseManager";
+import { FAQBuilder } from "@/components/support/FAQBuilder";
 import {
   Table,
   TableBody,
@@ -109,11 +111,12 @@ const Support = () => {
       </div>
 
       <Tabs defaultValue="all" className="space-y-6">
-        <TabsList>
+        <TabsList className="grid w-full grid-cols-5 max-w-3xl">
           <TabsTrigger value="all">All Tickets</TabsTrigger>
           <TabsTrigger value="open">Open</TabsTrigger>
-          <TabsTrigger value="progress">In Progress</TabsTrigger>
           <TabsTrigger value="resolved">Resolved</TabsTrigger>
+          <TabsTrigger value="knowledge">Knowledge Base</TabsTrigger>
+          <TabsTrigger value="faq">FAQ</TabsTrigger>
         </TabsList>
 
         <Card>
@@ -221,13 +224,6 @@ const Support = () => {
               </Table>
             </TabsContent>
 
-            <TabsContent value="progress" className="mt-0">
-              <div className="text-center py-8 text-muted-foreground">
-                <MessageSquare className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                <p>Filter for in progress tickets</p>
-              </div>
-            </TabsContent>
-
             <TabsContent value="resolved" className="mt-0">
               <div className="text-center py-8 text-muted-foreground">
                 <CheckCircle2 className="h-12 w-12 mx-auto mb-2 opacity-50" />
@@ -236,6 +232,14 @@ const Support = () => {
             </TabsContent>
           </CardContent>
         </Card>
+
+        <TabsContent value="knowledge" className="space-y-6">
+          <KnowledgeBaseManager />
+        </TabsContent>
+
+        <TabsContent value="faq" className="space-y-6">
+          <FAQBuilder />
+        </TabsContent>
       </Tabs>
     </div>
   );

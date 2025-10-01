@@ -1,12 +1,17 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bell, Send, Calendar, Users, BarChart3, Plus } from "lucide-react";
 import { pushCampaigns } from "@/lib/mockData";
+import { ABTestingPanel } from "@/components/notifications/ABTestingPanel";
 
 const Notifications = () => {
+  const [activeTab, setActiveTab] = useState("campaigns");
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -70,6 +75,14 @@ const Notifications = () => {
         </Card>
       </div>
 
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="grid w-full grid-cols-3 max-w-md">
+          <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
+          <TabsTrigger value="abtesting">A/B Testing</TabsTrigger>
+          <TabsTrigger value="send">Send New</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="campaigns" className="space-y-6 mt-6">
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Campaign Creator */}
         <div className="lg:col-span-1">
@@ -234,6 +247,23 @@ const Notifications = () => {
           </Card>
         </div>
       </div>
+        </TabsContent>
+
+        <TabsContent value="abtesting" className="space-y-6">
+          <ABTestingPanel />
+        </TabsContent>
+
+        <TabsContent value="send" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Send New Campaign</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">Campaign creation form will be displayed here.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

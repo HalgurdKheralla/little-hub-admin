@@ -8,6 +8,7 @@ import { ArticleEditor } from "@/components/learning/ArticleEditor";
 import { VideoLibrary } from "@/components/learning/VideoLibrary";
 import { QuizBuilder } from "@/components/learning/QuizBuilder";
 import { SubscriptionPlans } from "@/components/learning/SubscriptionPlans";
+import { ContentCalendar } from "@/components/learning/ContentCalendar";
 import {
   Table,
   TableBody,
@@ -43,11 +44,12 @@ const Learning = () => {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-5 max-w-3xl">
+        <TabsList className="grid w-full grid-cols-6 max-w-4xl">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="articles">Articles</TabsTrigger>
           <TabsTrigger value="videos">Videos</TabsTrigger>
           <TabsTrigger value="quizzes">Quizzes</TabsTrigger>
+          <TabsTrigger value="calendar">Calendar</TabsTrigger>
           <TabsTrigger value="subscriptions">Plans</TabsTrigger>
         </TabsList>
 
@@ -170,6 +172,10 @@ const Learning = () => {
 
         <TabsContent value="quizzes" className="space-y-6">
           <QuizBuilder />
+        </TabsContent>
+
+        <TabsContent value="calendar" className="space-y-6">
+          <ContentCalendar />
         </TabsContent>
 
         <TabsContent value="subscriptions" className="space-y-6">

@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search, Filter, Download, MoreHorizontal } from "lucide-react";
 import { DisputeResolution } from "@/components/orders/DisputeResolution";
+import { OrderWorkflow } from "@/components/orders/OrderWorkflow";
 import {
   Table,
   TableBody,
@@ -62,8 +63,9 @@ const Orders = () => {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-2 max-w-md">
+        <TabsList className="grid w-full grid-cols-3 max-w-md">
           <TabsTrigger value="orders">All Orders</TabsTrigger>
+          <TabsTrigger value="workflow">Workflow</TabsTrigger>
           <TabsTrigger value="disputes">Disputes</TabsTrigger>
         </TabsList>
 
@@ -195,6 +197,18 @@ const Orders = () => {
           </Table>
         </CardContent>
       </Card>
+        </TabsContent>
+
+        <TabsContent value="workflow" className="space-y-6">
+          <OrderWorkflow
+            order={{
+              id: "ORD-8934",
+              customer: "Sarah Johnson",
+              total: 299.99,
+              status: "Processing",
+              items: 3,
+            }}
+          />
         </TabsContent>
 
         <TabsContent value="disputes" className="space-y-6">

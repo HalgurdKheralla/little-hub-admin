@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { 
   LayoutDashboard, Users, Store, ShoppingBag, GraduationCap, 
   BarChart3, Bell, Settings, Menu, X, Moon, Sun, Search,
-  Package, MessageSquare
+  Package, MessageSquare, Smartphone
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,7 +23,7 @@ const navigationItems = [
   { name: "Learning Hub", href: "/learning", icon: GraduationCap },
   { name: "Analytics", href: "/analytics", icon: BarChart3 },
   { name: "Support", href: "/support", icon: MessageSquare },
-  { name: "Mobile App", href: "/mobile-app", icon: LayoutDashboard },
+  { name: "Mobile App", href: "/mobile-app", icon: Smartphone },
   { name: "Notifications", href: "/notifications", icon: Bell },
 ];
 

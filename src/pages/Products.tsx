@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Package, Star, MoreHorizontal } from "lucide-react";
 import { PromotionBuilder } from "@/components/products/PromotionBuilder";
+import { FeaturedProductsOrganizer } from "@/components/products/FeaturedProductsOrganizer";
+import { CategoryTreeView } from "@/components/products/CategoryTreeView";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,8 +34,10 @@ const Products = () => {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-2 max-w-md">
+        <TabsList className="grid w-full grid-cols-4 max-w-2xl">
           <TabsTrigger value="products">All Products</TabsTrigger>
+          <TabsTrigger value="featured">Featured</TabsTrigger>
+          <TabsTrigger value="categories">Categories</TabsTrigger>
           <TabsTrigger value="promotions">Promotions</TabsTrigger>
         </TabsList>
 
@@ -121,6 +125,14 @@ const Products = () => {
           </Card>
         ))}
       </div>
+        </TabsContent>
+
+        <TabsContent value="featured" className="space-y-6">
+          <FeaturedProductsOrganizer />
+        </TabsContent>
+
+        <TabsContent value="categories" className="space-y-6">
+          <CategoryTreeView />
         </TabsContent>
 
         <TabsContent value="promotions" className="space-y-6">

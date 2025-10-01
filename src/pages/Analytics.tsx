@@ -3,6 +3,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import { analyticsData, revenueData } from "@/lib/mockData";
 import { TrendingUp, Users, ShoppingBag, DollarSign } from "lucide-react";
+import { CustomReportBuilder } from "@/components/analytics/CustomReportBuilder";
+import { CohortAnalysis } from "@/components/analytics/CohortAnalysis";
 
 const COLORS = ['hsl(var(--primary))', 'hsl(var(--secondary))', 'hsl(var(--accent))', 'hsl(var(--warning))', 'hsl(var(--success))'];
 
@@ -17,11 +19,12 @@ const Analytics = () => {
       </div>
 
       <Tabs defaultValue="overview" className="space-y-6">
-        <TabsList>
+        <TabsList className="grid w-full grid-cols-5 max-w-3xl">
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="conversion">Conversion Funnel</TabsTrigger>
-          <TabsTrigger value="behavior">User Behavior</TabsTrigger>
-          <TabsTrigger value="products">Top Products</TabsTrigger>
+          <TabsTrigger value="funnel">Funnel</TabsTrigger>
+          <TabsTrigger value="products">Products</TabsTrigger>
+          <TabsTrigger value="cohorts">Cohorts</TabsTrigger>
+          <TabsTrigger value="reports">Reports</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
@@ -168,7 +171,7 @@ const Analytics = () => {
           </div>
         </TabsContent>
 
-        <TabsContent value="conversion" className="space-y-6">
+        <TabsContent value="funnel" className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle>Sales Conversion Funnel</CardTitle>
@@ -206,42 +209,6 @@ const Analytics = () => {
           </Card>
         </TabsContent>
 
-        <TabsContent value="behavior" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>User Activity Patterns</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={400}>
-                <LineChart data={analyticsData.userBehavior}>
-                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                  <XAxis 
-                    dataKey="hour" 
-                    tick={{ fill: "hsl(var(--muted-foreground))" }}
-                  />
-                  <YAxis 
-                    tick={{ fill: "hsl(var(--muted-foreground))" }}
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
-                      borderRadius: "var(--radius)",
-                    }}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="visits" 
-                    stroke="hsl(var(--primary))" 
-                    strokeWidth={3}
-                    dot={{ fill: "hsl(var(--primary))", r: 4 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
         <TabsContent value="products" className="space-y-6">
           <Card>
             <CardHeader>
@@ -274,6 +241,14 @@ const Analytics = () => {
               </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="cohorts" className="space-y-6">
+          <CohortAnalysis />
+        </TabsContent>
+
+        <TabsContent value="reports" className="space-y-6">
+          <CustomReportBuilder />
         </TabsContent>
       </Tabs>
     </div>
