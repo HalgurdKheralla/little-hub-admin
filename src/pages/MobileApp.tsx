@@ -4,8 +4,62 @@ import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Smartphone, Monitor, Palette, LayoutGrid, Image, Menu, GripVertical } from "lucide-react";
 import { mobileAppSections } from "@/lib/mockData";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const MobileApp = () => {
+  const { toast } = useToast();
+  const [primaryColor, setPrimaryColor] = useState("hsl(221.2, 83.2%, 53.3%)");
+  const [sections, setSections] = useState(mobileAppSections);
+  const [features, setFeatures] = useState([
+    { name: "Push Notifications", description: "Send promotional alerts", enabled: true },
+    { name: "In-App Chat", description: "Customer support messaging", enabled: true },
+    { name: "Dark Mode", description: "Allow users to switch themes", enabled: false },
+    { name: "Guest Checkout", description: "Checkout without account", enabled: true },
+    { name: "Social Login", description: "Sign in with Google/Apple", enabled: true },
+    { name: "Wishlist", description: "Save favorite products", enabled: true },
+  ]);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+
+  const handleDragStart = (index: number) => {
+    setDraggedIndex(index);
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === index) return;
+
+    const newSections = [...sections];
+    const draggedItem = newSections[draggedIndex];
+    newSections.splice(draggedIndex, 1);
+    newSections.splice(index, 0, draggedItem);
+
+    setSections(newSections.map((section, idx) => ({ ...section, order: idx + 1 })));
+    setDraggedIndex(index);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    toast({
+      title: "Section reordered",
+      description: "Homepage sections updated successfully",
+    });
+  };
+
+  const toggleSectionVisibility = (id: string) => {
+    setSections(sections.map(section => 
+      section.id === id ? { ...section, visible: !section.visible } : section
+    ));
+  };
+
+  const toggleFeature = (name: string) => {
+    setFeatures(features.map(feature => 
+      feature.name === name ? { ...feature, enabled: !feature.enabled } : feature
+    ));
+  };
+
+  const visibleSections = sections.filter(s => s.visible).sort((a, b) => a.order - b.order);
+
   return (
     <div className="space-y-6">
       <div>
@@ -49,41 +103,70 @@ const MobileApp = () => {
                     </div>
                   </div>
 
-                  {/* Hero */}
-                  <div className="h-32 rounded-lg gradient-primary flex items-center justify-center text-white">
-                    <div className="text-center">
-                      <h3 className="font-bold">Summer Sale</h3>
-                      <p className="text-xs mt-1">Up to 40% off</p>
-                    </div>
-                  </div>
-
-                  {/* Categories */}
-                  <div className="grid grid-cols-4 gap-2">
-                    {['Toys', 'Clothes', 'Safety', 'Food'].map(cat => (
-                      <div key={cat} className="text-center">
-                        <div className="h-12 w-12 mx-auto rounded-lg bg-muted flex items-center justify-center mb-1">
-                          <LayoutGrid className="h-5 w-5" />
-                        </div>
-                        <span className="text-xs">{cat}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Products */}
-                  <div>
-                    <h4 className="font-semibold mb-2">Featured Products</h4>
-                    <div className="grid grid-cols-2 gap-2">
-                      {[1, 2].map(i => (
-                        <div key={i} className="border rounded-lg overflow-hidden">
-                          <div className="aspect-square bg-muted" />
-                          <div className="p-2">
-                            <p className="text-xs font-medium line-clamp-1">Product Name</p>
-                            <p className="text-xs text-muted-foreground">$29.99</p>
+                  {/* Dynamic sections based on visibility and order */}
+                  {visibleSections.map((section) => {
+                    if (section.type === 'hero') {
+                      return (
+                        <div key={section.id} className="h-32 rounded-lg gradient-primary flex items-center justify-center text-white" style={{ background: primaryColor }}>
+                          <div className="text-center">
+                            <h3 className="font-bold">Summer Sale</h3>
+                            <p className="text-xs mt-1">Up to 40% off</p>
                           </div>
                         </div>
-                      ))}
+                      );
+                    }
+                    
+                    if (section.type === 'categories') {
+                      return (
+                        <div key={section.id} className="grid grid-cols-4 gap-2">
+                          {['Toys', 'Clothes', 'Safety', 'Food'].map(cat => (
+                            <div key={cat} className="text-center">
+                              <div className="h-12 w-12 mx-auto rounded-lg bg-muted flex items-center justify-center mb-1">
+                                <LayoutGrid className="h-5 w-5" />
+                              </div>
+                              <span className="text-xs">{cat}</span>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    }
+                    
+                    if (section.type === 'featured') {
+                      return (
+                        <div key={section.id}>
+                          <h4 className="font-semibold mb-2">Featured Products</h4>
+                          <div className="grid grid-cols-2 gap-2">
+                            {[1, 2].map(i => (
+                              <div key={i} className="border rounded-lg overflow-hidden">
+                                <div className="aspect-square bg-muted" />
+                                <div className="p-2">
+                                  <p className="text-xs font-medium line-clamp-1">Product Name</p>
+                                  <p className="text-xs text-muted-foreground">$29.99</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    if (section.type === 'banner') {
+                      return (
+                        <div key={section.id} className="h-20 rounded-lg bg-accent flex items-center justify-center">
+                          <p className="text-sm font-medium">Promotional Banner</p>
+                        </div>
+                      );
+                    }
+
+                    return null;
+                  })}
+
+                  {/* Feature indicators */}
+                  {features.find(f => f.name === "Wishlist")?.enabled && (
+                    <div className="text-center py-2">
+                      <Badge variant="outline" className="text-xs">Wishlist Enabled</Badge>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </CardContent>
@@ -105,9 +188,27 @@ const MobileApp = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Primary Color</label>
                   <div className="flex gap-2">
-                    <div className="h-10 w-10 rounded-lg bg-primary border-2 border-foreground cursor-pointer" />
-                    <div className="h-10 w-10 rounded-lg bg-secondary border cursor-pointer" />
-                    <div className="h-10 w-10 rounded-lg bg-accent border cursor-pointer" />
+                    <div 
+                      className="h-10 w-10 rounded-lg bg-primary border-2 border-foreground cursor-pointer hover:scale-105 transition-smooth" 
+                      onClick={() => {
+                        setPrimaryColor("hsl(221.2, 83.2%, 53.3%)");
+                        toast({ title: "Color updated", description: "Primary color applied" });
+                      }}
+                    />
+                    <div 
+                      className="h-10 w-10 rounded-lg bg-secondary border cursor-pointer hover:scale-105 transition-smooth" 
+                      onClick={() => {
+                        setPrimaryColor("hsl(210, 40%, 96.1%)");
+                        toast({ title: "Color updated", description: "Secondary color applied" });
+                      }}
+                    />
+                    <div 
+                      className="h-10 w-10 rounded-lg bg-accent border cursor-pointer hover:scale-105 transition-smooth" 
+                      onClick={() => {
+                        setPrimaryColor("hsl(210, 40%, 96.1%)");
+                        toast({ title: "Color updated", description: "Accent color applied" });
+                      }}
+                    />
                     <Button variant="outline" size="icon" className="h-10 w-10">
                       <Palette className="h-4 w-4" />
                     </Button>
@@ -143,13 +244,17 @@ const MobileApp = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                {mobileAppSections.map((section) => (
+                {sections.map((section, index) => (
                   <div
                     key={section.id}
-                    className="flex items-center justify-between p-3 rounded-lg border hover:border-primary transition-smooth"
+                    draggable
+                    onDragStart={() => handleDragStart(index)}
+                    onDragOver={(e) => handleDragOver(e, index)}
+                    onDragEnd={handleDragEnd}
+                    className="flex items-center justify-between p-3 rounded-lg border hover:border-primary transition-smooth cursor-move"
                   >
                     <div className="flex items-center gap-3">
-                      <GripVertical className="h-4 w-4 text-muted-foreground cursor-move" />
+                      <GripVertical className="h-4 w-4 text-muted-foreground" />
                       <div>
                         <p className="font-medium">{section.name}</p>
                         <div className="flex items-center gap-2 mt-1">
@@ -162,7 +267,10 @@ const MobileApp = () => {
                         </div>
                       </div>
                     </div>
-                    <Switch checked={section.visible} />
+                    <Switch 
+                      checked={section.visible} 
+                      onCheckedChange={() => toggleSectionVisibility(section.id)}
+                    />
                   </div>
                 ))}
               </div>
@@ -179,14 +287,7 @@ const MobileApp = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {[
-                  { name: "Push Notifications", description: "Send promotional alerts", enabled: true },
-                  { name: "In-App Chat", description: "Customer support messaging", enabled: true },
-                  { name: "Dark Mode", description: "Allow users to switch themes", enabled: false },
-                  { name: "Guest Checkout", description: "Checkout without account", enabled: true },
-                  { name: "Social Login", description: "Sign in with Google/Apple", enabled: true },
-                  { name: "Wishlist", description: "Save favorite products", enabled: true },
-                ].map((feature) => (
+                {features.map((feature) => (
                   <div
                     key={feature.name}
                     className="flex items-center justify-between p-3 rounded-lg hover:bg-muted transition-smooth"
@@ -197,7 +298,10 @@ const MobileApp = () => {
                         {feature.description}
                       </p>
                     </div>
-                    <Switch checked={feature.enabled} />
+                    <Switch 
+                      checked={feature.enabled} 
+                      onCheckedChange={() => toggleFeature(feature.name)}
+                    />
                   </div>
                 ))}
               </div>
