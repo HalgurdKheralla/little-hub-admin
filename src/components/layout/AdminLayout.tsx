@@ -23,6 +23,8 @@ const navigationItems = [
   { name: "Learning Hub", href: "/learning", icon: GraduationCap },
   { name: "Analytics", href: "/analytics", icon: BarChart3 },
   { name: "Support", href: "/support", icon: MessageSquare },
+  { name: "Mobile App", href: "/mobile-app", icon: LayoutDashboard },
+  { name: "Notifications", href: "/notifications", icon: Bell },
 ];
 
 export const AdminLayout = ({ children }: AdminLayoutProps) => {

@@ -1,4 +1,4 @@
-// Mock data for the admin dashboard
+// Comprehensive mock data for the admin dashboard
 
 export const dashboardMetrics = {
   totalRevenue: 1247500,
@@ -16,12 +16,12 @@ export const dashboardMetrics = {
 };
 
 export const revenueData = [
-  { date: "Jan", revenue: 85000 },
-  { date: "Feb", revenue: 92000 },
-  { date: "Mar", revenue: 98000 },
-  { date: "Apr", revenue: 105000 },
-  { date: "May", revenue: 115000 },
-  { date: "Jun", revenue: 125000 },
+  { date: "Jan", revenue: 85000, orders: 1240 },
+  { date: "Feb", revenue: 92000, orders: 1380 },
+  { date: "Mar", revenue: 98000, orders: 1520 },
+  { date: "Apr", revenue: 105000, orders: 1680 },
+  { date: "May", revenue: 115000, orders: 1890 },
+  { date: "Jun", revenue: 125000, orders: 2100 },
 ];
 
 export const mockUsers = [
@@ -30,6 +30,9 @@ export const mockUsers = [
   { id: "3", name: "Michael Brown", email: "m.brown@example.com", role: "Vendor", status: "Active", joinDate: "2024-01-10", orders: 0, spent: 0 },
   { id: "4", name: "Jessica Martinez", email: "jess.m@example.com", role: "Customer", status: "Inactive", joinDate: "2023-11-05", orders: 3, spent: 450 },
   { id: "5", name: "David Lee", email: "david.lee@example.com", role: "Customer", status: "Active", joinDate: "2024-03-12", orders: 15, spent: 3200 },
+  { id: "6", name: "Amanda White", email: "amanda.w@example.com", role: "Vendor", status: "Active", joinDate: "2024-02-05", orders: 0, spent: 0 },
+  { id: "7", name: "Robert Taylor", email: "rob.t@example.com", role: "Vendor", status: "Pending", joinDate: "2024-06-20", orders: 0, spent: 0 },
+  { id: "8", name: "Lisa Anderson", email: "lisa.a@example.com", role: "Customer", status: "Active", joinDate: "2024-04-18", orders: 6, spent: 890 },
 ];
 
 export const mockVendors = [
@@ -71,6 +74,19 @@ export const mockVendors = [
     pendingPayout: 0,
     rating: 0,
     joinDate: "2024-06-20",
+  },
+  {
+    id: "4",
+    businessName: "Little Wonders",
+    ownerName: "Jennifer Davis",
+    email: "support@littlewonders.com",
+    status: "Approved",
+    products: 28,
+    totalSales: 67000,
+    commission: 15,
+    pendingPayout: 2890,
+    rating: 4.9,
+    joinDate: "2024-03-15",
   },
 ];
 
@@ -114,6 +130,85 @@ export const mockProducts = [
     rating: 0,
     image: "safety-gate",
   },
+  {
+    id: "4",
+    name: "Soft Baby Blanket Set",
+    vendor: "Little Wonders",
+    category: "Bedding",
+    price: 34.99,
+    stock: 120,
+    sold: 198,
+    status: "Active",
+    featured: false,
+    rating: 4.8,
+    image: "baby-blanket",
+  },
+  {
+    id: "5",
+    name: "Baby Monitor with Camera",
+    vendor: "Baby Bliss Co.",
+    category: "Electronics",
+    price: 129.99,
+    stock: 45,
+    sold: 67,
+    status: "Active",
+    featured: true,
+    rating: 4.6,
+    image: "baby-monitor",
+  },
+];
+
+export const mockOrders = [
+  {
+    id: "ORD-001",
+    customer: "Sarah Johnson",
+    date: "2024-06-15",
+    items: 3,
+    total: 149.97,
+    status: "Delivered",
+    paymentStatus: "Paid",
+    vendor: "Baby Bliss Co.",
+  },
+  {
+    id: "ORD-002",
+    customer: "Emily Chen",
+    date: "2024-06-14",
+    items: 2,
+    total: 79.98,
+    status: "Shipped",
+    paymentStatus: "Paid",
+    vendor: "Tiny Treasures",
+  },
+  {
+    id: "ORD-003",
+    customer: "David Lee",
+    date: "2024-06-13",
+    items: 1,
+    total: 89.99,
+    status: "Processing",
+    paymentStatus: "Paid",
+    vendor: "Kids Corner",
+  },
+  {
+    id: "ORD-004",
+    customer: "Lisa Anderson",
+    date: "2024-06-12",
+    items: 4,
+    total: 219.96,
+    status: "Pending",
+    paymentStatus: "Pending",
+    vendor: "Little Wonders",
+  },
+  {
+    id: "ORD-005",
+    customer: "Sarah Johnson",
+    date: "2024-06-11",
+    items: 2,
+    total: 164.98,
+    status: "Cancelled",
+    paymentStatus: "Refunded",
+    vendor: "Baby Bliss Co.",
+  },
 ];
 
 export const mockArticles = [
@@ -126,6 +221,7 @@ export const mockArticles = [
     views: 4521,
     publishDate: "2024-05-15",
     featured: true,
+    excerpt: "Learn essential safe sleep guidelines to protect your newborn...",
   },
   {
     id: "2",
@@ -136,6 +232,7 @@ export const mockArticles = [
     views: 3890,
     publishDate: "2024-05-20",
     featured: false,
+    excerpt: "Discover the Montessori method and how it benefits early childhood development...",
   },
   {
     id: "3",
@@ -146,6 +243,18 @@ export const mockArticles = [
     views: 0,
     publishDate: "",
     featured: false,
+    excerpt: "Everything you need to know about introducing solid foods to your baby...",
+  },
+  {
+    id: "4",
+    title: "Choosing the Right Baby Carrier",
+    author: "Amanda White",
+    category: "Products",
+    status: "Published",
+    views: 2145,
+    publishDate: "2024-06-01",
+    featured: false,
+    excerpt: "Find the perfect baby carrier for you and your little one...",
   },
 ];
 
@@ -155,4 +264,142 @@ export const mockActivities = [
   { id: "3", type: "user", user: "Emily Chen", action: "joined the platform", time: "1 hour ago" },
   { id: "4", type: "order", user: "David Lee", action: "completed purchase", time: "2 hours ago", amount: "$89.99" },
   { id: "5", type: "article", user: "Dr. Sarah Johnson", action: "published new article", time: "3 hours ago" },
+  { id: "6", type: "vendor", user: "Little Wonders", action: "updated inventory", time: "4 hours ago" },
+  { id: "7", type: "order", user: "Lisa Anderson", action: "requested refund", time: "5 hours ago", amount: "$164.98" },
+];
+
+export const mockTickets = [
+  {
+    id: "TKT-001",
+    subject: "Product not received",
+    customer: "Sarah Johnson",
+    priority: "High",
+    status: "Open",
+    created: "2024-06-15 10:30 AM",
+    category: "Order Issue",
+  },
+  {
+    id: "TKT-002",
+    subject: "Question about product safety",
+    customer: "Emily Chen",
+    priority: "Medium",
+    status: "In Progress",
+    created: "2024-06-14 2:15 PM",
+    category: "Product Inquiry",
+  },
+  {
+    id: "TKT-003",
+    subject: "Payment failed",
+    customer: "David Lee",
+    priority: "High",
+    status: "Open",
+    created: "2024-06-14 9:00 AM",
+    category: "Payment Issue",
+  },
+  {
+    id: "TKT-004",
+    subject: "Vendor application status",
+    customer: "Robert Taylor",
+    priority: "Low",
+    status: "Resolved",
+    created: "2024-06-13 4:30 PM",
+    category: "Account",
+  },
+];
+
+export const mockNotifications = [
+  {
+    id: "1",
+    title: "New Order Received",
+    message: "Order #ORD-001 from Sarah Johnson",
+    time: "5 mins ago",
+    read: false,
+    type: "order",
+  },
+  {
+    id: "2",
+    title: "Product Approval Required",
+    message: "Kids Corner submitted a new product for review",
+    time: "1 hour ago",
+    read: false,
+    type: "vendor",
+  },
+  {
+    id: "3",
+    title: "New Support Ticket",
+    message: "TKT-001: Product not received",
+    time: "2 hours ago",
+    read: true,
+    type: "support",
+  },
+];
+
+export const analyticsData = {
+  conversionFunnel: [
+    { stage: "Visitors", count: 10000, percentage: 100 },
+    { stage: "Product Views", count: 6500, percentage: 65 },
+    { stage: "Add to Cart", count: 2800, percentage: 28 },
+    { stage: "Checkout", count: 1200, percentage: 12 },
+    { stage: "Purchase", count: 380, percentage: 3.8 },
+  ],
+  userBehavior: [
+    { hour: "00:00", visits: 45 },
+    { hour: "03:00", visits: 23 },
+    { hour: "06:00", visits: 67 },
+    { hour: "09:00", visits: 234 },
+    { hour: "12:00", visits: 456 },
+    { hour: "15:00", visits: 389 },
+    { hour: "18:00", visits: 512 },
+    { hour: "21:00", visits: 298 },
+  ],
+  topProducts: [
+    { name: "Organic Cotton Baby Onesie", sales: 234, revenue: 7016 },
+    { name: "Wooden Montessori Toy Set", sales: 156, revenue: 7798 },
+    { name: "Soft Baby Blanket Set", sales: 198, revenue: 6928 },
+    { name: "Baby Monitor with Camera", sales: 67, revenue: 8709 },
+    { name: "Baby Safety Gate", sales: 89, revenue: 8009 },
+  ],
+};
+
+export const mobileAppSections = [
+  { id: "hero", name: "Hero Banner", type: "banner", visible: true, order: 1 },
+  { id: "featured", name: "Featured Products", type: "products", visible: true, order: 2 },
+  { id: "categories", name: "Shop by Category", type: "categories", visible: true, order: 3 },
+  { id: "learning", name: "Learning Hub", type: "content", visible: true, order: 4 },
+  { id: "vendors", name: "Top Vendors", type: "vendors", visible: true, order: 5 },
+  { id: "deals", name: "Daily Deals", type: "promotion", visible: false, order: 6 },
+];
+
+export const pushCampaigns = [
+  {
+    id: "1",
+    name: "Summer Sale Launch",
+    audience: "All Active Users",
+    scheduled: "2024-06-20 9:00 AM",
+    status: "Scheduled",
+    estimatedReach: 8543,
+    message: "🌞 Summer Sale is here! Get up to 40% off on baby essentials",
+  },
+  {
+    id: "2",
+    name: "New Arrival Alert",
+    audience: "Recent Buyers",
+    scheduled: "2024-06-18 10:00 AM",
+    status: "Sent",
+    estimatedReach: 2156,
+    message: "✨ New products just arrived! Check out the latest additions",
+    delivered: 2089,
+    opened: 834,
+  },
+  {
+    id: "3",
+    name: "Cart Abandonment",
+    audience: "Abandoned Carts",
+    scheduled: "2024-06-17 6:00 PM",
+    status: "Sent",
+    estimatedReach: 456,
+    message: "🛒 Don't forget! Your cart is waiting for you",
+    delivered: 445,
+    opened: 178,
+  },
 ];
