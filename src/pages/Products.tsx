@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Package, Star, MoreHorizontal } from "lucide-react";
+import { PromotionBuilder } from "@/components/products/PromotionBuilder";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +14,8 @@ import {
 import { mockProducts } from "@/lib/mockData";
 
 const Products = () => {
+  const [activeTab, setActiveTab] = useState("products");
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -26,6 +31,13 @@ const Products = () => {
         </Button>
       </div>
 
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="grid w-full grid-cols-2 max-w-md">
+          <TabsTrigger value="products">All Products</TabsTrigger>
+          <TabsTrigger value="promotions">Promotions</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="products" className="space-y-6">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {mockProducts.map((product) => (
           <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-smooth">
@@ -109,6 +121,12 @@ const Products = () => {
           </Card>
         ))}
       </div>
+        </TabsContent>
+
+        <TabsContent value="promotions" className="space-y-6">
+          <PromotionBuilder />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

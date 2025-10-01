@@ -3,7 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search, Filter, Download, MoreHorizontal } from "lucide-react";
+import { DisputeResolution } from "@/components/orders/DisputeResolution";
 import {
   Table,
   TableBody,
@@ -22,6 +24,7 @@ import { mockOrders } from "@/lib/mockData";
 
 const Orders = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState("orders");
 
   const getStatusColor = (status: string) => {
     const colors = {
@@ -57,6 +60,14 @@ const Orders = () => {
           Export Orders
         </Button>
       </div>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="grid w-full grid-cols-2 max-w-md">
+          <TabsTrigger value="orders">All Orders</TabsTrigger>
+          <TabsTrigger value="disputes">Disputes</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="orders" className="space-y-6">
 
       {/* Quick Stats */}
       <div className="grid gap-4 md:grid-cols-4">
@@ -184,6 +195,12 @@ const Orders = () => {
           </Table>
         </CardContent>
       </Card>
+        </TabsContent>
+
+        <TabsContent value="disputes" className="space-y-6">
+          <DisputeResolution />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

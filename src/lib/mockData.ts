@@ -403,3 +403,185 @@ export const pushCampaigns = [
     opened: 178,
   },
 ];
+
+export const mockVideos = [
+  {
+    id: "1",
+    title: "Baby Sleep Training 101",
+    author: "Dr. Sarah Johnson",
+    duration: "15:30",
+    views: 12450,
+    category: "Health & Safety",
+    publishDate: "2024-05-10",
+    thumbnail: "sleep-training",
+  },
+  {
+    id: "2",
+    title: "Introducing Solid Foods",
+    author: "Emily Chen",
+    duration: "22:15",
+    views: 8920,
+    category: "Nutrition",
+    publishDate: "2024-05-25",
+    thumbnail: "solid-foods",
+  },
+];
+
+export const mockQuizzes = [
+  {
+    id: "1",
+    title: "Baby Safety Quiz",
+    questions: 10,
+    completions: 543,
+    avgScore: 8.2,
+    category: "Health & Safety",
+  },
+  {
+    id: "2",
+    title: "Nutrition Basics",
+    questions: 15,
+    completions: 421,
+    avgScore: 7.8,
+    category: "Nutrition",
+  },
+];
+
+export const mockCategories = [
+  { id: "1", name: "Health & Safety", articles: 15, videos: 8, parent: null },
+  { id: "2", name: "Nutrition", articles: 12, videos: 6, parent: null },
+  { id: "3", name: "Education", articles: 10, videos: 5, parent: null },
+  { id: "4", name: "Products", articles: 8, videos: 3, parent: null },
+  { id: "5", name: "Safe Sleep", articles: 5, videos: 2, parent: "1" },
+  { id: "6", name: "First Aid", articles: 4, videos: 3, parent: "1" },
+];
+
+export const mockPayouts = [
+  {
+    id: "1",
+    vendor: "Baby Bliss Co.",
+    amount: 5250,
+    status: "Pending",
+    requestDate: "2024-06-15",
+    dueDate: "2024-06-22",
+  },
+  {
+    id: "2",
+    vendor: "Tiny Treasures",
+    amount: 3120,
+    status: "Processing",
+    requestDate: "2024-06-14",
+    dueDate: "2024-06-21",
+  },
+  {
+    id: "3",
+    vendor: "Little Wonders",
+    amount: 2890,
+    status: "Completed",
+    requestDate: "2024-06-10",
+    dueDate: "2024-06-17",
+    paidDate: "2024-06-16",
+  },
+];
+
+export const mockPromotions = [
+  {
+    id: "1",
+    name: "Summer Sale 2024",
+    type: "Percentage",
+    value: 40,
+    startDate: "2024-06-20",
+    endDate: "2024-07-31",
+    status: "Scheduled",
+    products: 125,
+  },
+  {
+    id: "2",
+    name: "New Parent Bundle",
+    type: "Fixed Amount",
+    value: 25,
+    startDate: "2024-06-01",
+    endDate: "2024-12-31",
+    status: "Active",
+    products: 45,
+  },
+];
+
+export const mockDiscountCodes = [
+  {
+    id: "1",
+    code: "WELCOME20",
+    discount: 20,
+    type: "Percentage",
+    uses: 234,
+    limit: 1000,
+    status: "Active",
+    expiryDate: "2024-12-31",
+  },
+  {
+    id: "2",
+    code: "FREESHIP",
+    discount: 0,
+    type: "Free Shipping",
+    uses: 567,
+    limit: null,
+    status: "Active",
+    expiryDate: "2024-12-31",
+  },
+];
+
+export const mockDisputes = [
+  {
+    id: "1",
+    orderId: "ORD-001",
+    customer: "Sarah Johnson",
+    vendor: "Baby Bliss Co.",
+    reason: "Product not as described",
+    status: "Open",
+    createdDate: "2024-06-15",
+    amount: 149.97,
+  },
+  {
+    id: "2",
+    orderId: "ORD-005",
+    customer: "Sarah Johnson",
+    vendor: "Baby Bliss Co.",
+    reason: "Late delivery",
+    status: "Resolved",
+    createdDate: "2024-06-11",
+    amount: 164.98,
+  },
+];
+
+export const mockSubscriptionPlans = [
+  {
+    id: "1",
+    name: "Basic",
+    price: 0,
+    features: ["Access to free articles", "Weekly newsletter", "Community forum"],
+    subscribers: 8543,
+    status: "Active",
+  },
+  {
+    id: "2",
+    name: "Premium",
+    price: 9.99,
+    features: ["All free features", "Unlimited video access", "Downloadable guides", "Expert Q&A sessions"],
+    subscribers: 1247,
+    status: "Active",
+  },
+  {
+    id: "3",
+    name: "Pro",
+    price: 19.99,
+    features: ["All premium features", "1-on-1 consultations", "Custom meal plans", "Priority support"],
+    subscribers: 324,
+    status: "Active",
+  },
+];
+
+export const mockUserActivity = [
+  { date: "2024-06-10", action: "Logged in", details: "From mobile app" },
+  { date: "2024-06-11", action: "Placed order", details: "Order #ORD-001" },
+  { date: "2024-06-12", action: "Left review", details: "5 stars for Organic Cotton Onesie" },
+  { date: "2024-06-13", action: "Added to wishlist", details: "Baby Monitor with Camera" },
+];

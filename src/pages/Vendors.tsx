@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Store, DollarSign, Package, Star, MoreHorizontal } from "lucide-react";
+import { VendorKanban } from "@/components/vendors/VendorKanban";
+import { PayoutManagement } from "@/components/vendors/PayoutManagement";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +15,8 @@ import {
 import { mockVendors } from "@/lib/mockData";
 
 const Vendors = () => {
+  const [activeTab, setActiveTab] = useState("directory");
+
   return (
     <div className="space-y-6">
       <div>
@@ -20,6 +26,14 @@ const Vendors = () => {
         </p>
       </div>
 
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="grid w-full grid-cols-3 max-w-md">
+          <TabsTrigger value="directory">Vendor Directory</TabsTrigger>
+          <TabsTrigger value="applications">Applications</TabsTrigger>
+          <TabsTrigger value="payouts">Payouts</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="directory" className="space-y-6">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {mockVendors.map((vendor) => (
           <Card key={vendor.id} className="overflow-hidden hover:shadow-lg transition-smooth">
@@ -105,6 +119,16 @@ const Vendors = () => {
           </Card>
         ))}
       </div>
+        </TabsContent>
+
+        <TabsContent value="applications" className="space-y-6">
+          <VendorKanban />
+        </TabsContent>
+
+        <TabsContent value="payouts" className="space-y-6">
+          <PayoutManagement />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

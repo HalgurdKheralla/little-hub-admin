@@ -1,7 +1,13 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileText, Eye, Calendar, MoreHorizontal, PlusCircle } from "lucide-react";
+import { ArticleEditor } from "@/components/learning/ArticleEditor";
+import { VideoLibrary } from "@/components/learning/VideoLibrary";
+import { QuizBuilder } from "@/components/learning/QuizBuilder";
+import { SubscriptionPlans } from "@/components/learning/SubscriptionPlans";
 import {
   Table,
   TableBody,
@@ -19,6 +25,8 @@ import {
 import { mockArticles } from "@/lib/mockData";
 
 const Learning = () => {
+  const [activeTab, setActiveTab] = useState("overview");
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -30,9 +38,20 @@ const Learning = () => {
         </div>
         <Button className="gradient-primary">
           <PlusCircle className="mr-2 h-4 w-4" />
-          Create Article
+          Create Content
         </Button>
       </div>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="grid w-full grid-cols-5 max-w-3xl">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="articles">Articles</TabsTrigger>
+          <TabsTrigger value="videos">Videos</TabsTrigger>
+          <TabsTrigger value="quizzes">Quizzes</TabsTrigger>
+          <TabsTrigger value="subscriptions">Plans</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="overview" className="space-y-6">
 
       <div className="grid gap-6 md:grid-cols-3">
         <Card className="hover:shadow-lg transition-smooth">
@@ -139,6 +158,24 @@ const Learning = () => {
           </Table>
         </CardContent>
       </Card>
+        </TabsContent>
+
+        <TabsContent value="articles" className="space-y-6">
+          <ArticleEditor />
+        </TabsContent>
+
+        <TabsContent value="videos" className="space-y-6">
+          <VideoLibrary />
+        </TabsContent>
+
+        <TabsContent value="quizzes" className="space-y-6">
+          <QuizBuilder />
+        </TabsContent>
+
+        <TabsContent value="subscriptions" className="space-y-6">
+          <SubscriptionPlans />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
